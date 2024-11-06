@@ -48,9 +48,6 @@ public partial class SpearThyself
 
 	/*private void SpawnSpearInSlugcat(Player slugcat)
 	{
-		World world = slugcat.room.world;
-		WorldCoordinate initalSpawnPos = new WorldCoordinate(slugcat.room.index, slugcat.bodyChunks[0].pos);
-
-		AbstractPhysicalObject abtractObject = new AbstractPhysicalObject(slugcat.room.world, AbstractPhysicalObject.AbstractObjectType.Spear, null, )
+	
 	}*/
 }
