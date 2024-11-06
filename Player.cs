@@ -16,6 +16,8 @@ public partial class SpearThyself
 
 			if (isHoldingSpear)
 			{
+				// play the stabby sfx when you die
+				slugcat.room.PlaySound(SoundID.Spear_Stick_In_Creature, slugcat.bodyChunks[0].pos); // index 0 is the main body
 				slugcat.Die();
 				isHoldingSpear = false;
 			} else // here for debugging purposes
