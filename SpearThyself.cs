@@ -9,6 +9,8 @@ using RWCustom;
 using BepInEx;
 using Debug = UnityEngine.Debug;
 
+using ImprovedInput;
+
 // bypass fields that are set to private
 #pragma warning disable CS0618
 [module: UnverifiableCode]
@@ -21,6 +23,8 @@ namespace spearthyself;
 
 public partial class SpearThyself : BaseUnityPlugin
 {
+	public static readonly PlayerKeybind suicideButton = PlayerKeybind.Register("spearthyself:suicide", "Spear Thyself", "Suicide", KeyCode.I, KeyCode.Joystick1Button4);
+
 	private void OnEnable()
 	{
 		On.RainWorld.OnModsInit += RainWorldOnOnModsInit;
