@@ -4,33 +4,33 @@ namespace spearthyself;
 
 public partial class SpearThyself
 {
-	bool isHoldingSpear = false;
+	Spear slugcatSpear;
 
 	private void PlayerOnUpdate(On.Player.orig_Update orig, Player slugcat, bool eu)
 	{
 		orig(slugcat, eu); //Always call original code, either before or after your code, depending on what you need to achieve
 
-		if (Input.GetKeyDown(KeyCode.I))
-		{
-			isHoldingSpear = DestroySpear(slugcat);
+		slugcatSpear = GetSpearFromSlugcat(slugcat);
 
-			if (isHoldingSpear)
+		if (Input.GetKeyDown(KeyCode.I)) // here for debugging purposes
+		{
+			if (slugcatSpear != null)
 			{
-				// play the stabby sfx when you die
-				slugcat.room.PlaySound(SoundID.Spear_Stick_In_Creature, slugcat.bodyChunks[0].pos); // index 0 is the main body
+				SharedPhysics.CollisionResult result = new SharedPhysics.CollisionResult();
+				result.obj = slugcat;
+
+				// stabs yourself lol!!!!!!!!!!!!!!
+				slugcatSpear.HitSomething(result, eu);
 				slugcat.Die();
-				isHoldingSpear = false;
-			} else // here for debugging purposes
-			{
-				slugcat.Jump();
+				slugcatSpear = null;
 			}
 		}
 	}
 
-	private bool DestroySpear(Player slugcat)
+	private Spear GetSpearFromSlugcat(Player slugcat)
 	{
 		if (slugcat.grasps == null)
-			return false;
+			return null;
 
 
 		foreach (var holding in slugcat.grasps)
@@ -38,16 +38,10 @@ public partial class SpearThyself
 			// if slot is not empty and is holding a spear
 			if (holding != null && holding.grabbed is Spear)
 			{
-				holding.grabbed.Destroy(); // GET THAT SHIT OUTTA HERE!!!!!!!!
-				return true;
+				return (Spear)holding.grabbed;
 			}
 		}
-		// if not already returned a value, return false
-		return false;
+		// if no spear is found, return null
+		return null;
 	}
-
-	/*private void SpawnSpearInSlugcat(Player slugcat)
-	{
-	
-	}*/
 }

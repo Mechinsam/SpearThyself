@@ -8,6 +8,7 @@ using UnityEngine;
 using RWCustom;
 using BepInEx;
 using Debug = UnityEngine.Debug;
+using System.Data.SqlClient;
 
 // bypass fields that are set to private
 #pragma warning disable CS0618
