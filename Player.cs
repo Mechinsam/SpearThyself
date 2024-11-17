@@ -21,6 +21,8 @@ public partial class SpearThyself
 
 				// stabs yourself lol!!!!!!!!!!!!!!
 				slugcatSpear.HitSomething(result, eu);
+				if (slugcatSpear is ExplosiveSpear explosiveSpear)
+					explosiveSpear.Ignite();
 				slugcat.Die();
 				slugcatSpear = null;
 			}
@@ -36,7 +38,11 @@ public partial class SpearThyself
 		foreach (var holding in slugcat.grasps)
 		{
 			// if slot is not empty and is holding a spear
-			if (holding != null && holding.grabbed is Spear)
+			if (holding != null && holding.grabbed is ExplosiveSpear)
+			{
+				return (ExplosiveSpear)holding.grabbed;
+			}
+			else if (holding != null && holding.grabbed is Spear)
 			{
 				return (Spear)holding.grabbed;
 			}
